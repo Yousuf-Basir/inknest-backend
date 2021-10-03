@@ -15,7 +15,8 @@ const multerUpload = multer({
             return cb(new Error("File type not supported"));
         }
     }
-}).single("inknestFiles"); // inknestFiles is the name of html file input
+}).single("inknestFiles");
+// inknestFiles is the name of html file input
 
 
 module.exports = multerUpload;

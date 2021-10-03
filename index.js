@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
+var cors = require('cors');
 const app = express();
 
 // Routes
@@ -9,6 +10,7 @@ const getData = require("./Routes/getData.route");
 const fileCrude = require("./Routes/fileCrud.route");
 const shelfCrud = require("./Routes/shelfCrud.route");
 
+app.use(cors())
 app.use(express.json());
 
 app.use(authRoute);
