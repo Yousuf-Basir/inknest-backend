@@ -1,5 +1,5 @@
 const multer = require("multer");
-const getFileStoragePath = require("../../tools/getFileStoragePath.tool");
+const {getFileStoragePath} = require("../../tools/getFileStoragePath.tool");
 
 // Multer configurations
 const multerUpload = multer({

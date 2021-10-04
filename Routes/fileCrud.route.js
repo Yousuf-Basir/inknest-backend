@@ -4,10 +4,12 @@ const deleteUserFile = require("../middlewares/HandleFile/deleteUserFile.middlew
 const listUserFiles = require("../middlewares/HandleFile/listUserFiles.middleware");
 const multerUpload = require("../middlewares/HandleFile/multer.middeware");
 const saveFile = require("../middlewares/HandleFile/saveFile.middleware");
+const deleteThumbnail = require("../middlewares/HandleThumbnail/deleteThumbnail.middleware");
+const makeThumbnail = require("../middlewares/HandleThumbnail/makeThumbnail.midddleware");
 
 const router = Router();
 // file upload
-router.post("/file", authenticateToken, multerUpload, saveFile, (req, res) => {
+router.post("/file", authenticateToken, multerUpload, makeThumbnail, saveFile, (req, res) => {
     res.json(req.file);
 });
 
@@ -17,7 +19,7 @@ router.get("/file", authenticateToken, listUserFiles, (req, res) => {
 });
 
 // Delete user file
-router.delete("/file", authenticateToken, deleteUserFile, (req, res) => {
+router.delete("/file", authenticateToken, deleteUserFile, deleteThumbnail, (req, res) => {
     res.json({
         "msg": "file deleted"
     });

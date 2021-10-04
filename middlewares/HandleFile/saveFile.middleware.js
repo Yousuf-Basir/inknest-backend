@@ -5,7 +5,8 @@ const saveFile = async (req, res, next) => {
     // Get user UID from req object passed by authenticateToken middleware
     const {userUid, inkShelfUid} = req.user;
     // Get file properties from req object passed by multer middleware
-    const {originalname, mimetype, destination, filename, path, size} = req.file;
+    // Also get thumbnailPath the passed by makeThumbnail middleware
+    const {originalname, mimetype, destination, filename, path, size, thumbnailPath} = req.file;
 
     // if no shelf uid provided save to default inkShelf
     const shelfUId = req.body.shelfUid || inkShelfUid;
@@ -14,6 +15,7 @@ const saveFile = async (req, res, next) => {
     // replace backslash with double backslash as mysql doesnt support single backslash in value
     const formatedDestination = destination.replace(/\\/g, "\\\\");
     const formatedPath = path.replace(/\\/g, "\\\\");
+    const formatedThumbnailPath = thumbnailPath.replace(/\\/g, "\\\\");
 
     // Save file properties in database
     await pool.promise().query(`
@@ -36,7 +38,7 @@ const saveFile = async (req, res, next) => {
                 "${formatedPath}", 
                 "${size}", 
                 "${mimetype}",
-                "${"empty"}")
+                "${formatedThumbnailPath}")
     `);
 
     next();

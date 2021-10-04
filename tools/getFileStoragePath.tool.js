@@ -7,4 +7,13 @@ const getFileStoragePath = () => {
     return fileStoragePath;
 }
 
-module.exports = getFileStoragePath;
+const getThumbnailStoragePath = () => {
+    const homeDir = os.homedir();
+    const thumbnailPath = path.join(homeDir, "inknest", "usersFiles", "thumbnails");
+    return thumbnailPath;
+}
+
+module.exports = {
+    getFileStoragePath: getFileStoragePath,
+    getThumbnailStoragePath: getThumbnailStoragePath
+};

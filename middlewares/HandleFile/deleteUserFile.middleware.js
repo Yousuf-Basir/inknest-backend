@@ -13,12 +13,13 @@ const deleteUserFile = async (req, res, next) => {
         if( deletedFile[0].affectedRows >0 ){
             next();
         }else{
-            return res.send(500);
+            return res.sendStatus(500);
         }
     }).catch((err)=>{
         console.log(err);
         return res.sendStatus(500)
     });
 }
+
 
 module.exports = deleteUserFile;
