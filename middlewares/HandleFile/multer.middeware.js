@@ -8,12 +8,13 @@ const multerUpload = multer({
         fileSize: 1024*1024 * 10,  // 10 mb
     },
     fileFilter: (req, file, cb) => {
-        if(file.mimetype == "application/pdf"){
-            cb(null, true);
-        }else{
-            cb(null, false);
-            return cb(new Error("File type not supported"));
-        }
+        // if(file.mimetype == "application/pdf"){
+        //     cb(null, true);
+        // }else{
+        //     cb(null, false);
+        //     return cb(new Error("File type not supported"));
+        // }
+        cb(null, true);
     }
 }).single("inknestFiles");
 // inknestFiles is the name of html file input

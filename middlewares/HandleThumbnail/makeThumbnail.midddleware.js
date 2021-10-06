@@ -7,6 +7,10 @@ const makeThumbnail = (req, res, next) => {
     // get the file path as filePath passed by multer middleware
     const {file}= req;
 
+    if(file.mimetype !== "application/pdf"){
+        return next();
+    }
+
     let option = {
         format : 'jpeg',
         out_dir : getThumbnailStoragePath(),
