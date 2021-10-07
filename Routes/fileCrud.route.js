@@ -26,9 +26,9 @@ router.delete("/file", authenticateToken, deleteUserFile, deleteThumbnail, (req,
 });
 
 // Send download link of a file
-router.post("/file/geturl", authenticateToken, (req, res) => {
+router.get("/file/geturl", authenticateToken, (req, res) => {
     // get filePath from POST resuest body
-    const filePath = req.body.filePath;
+    const filePath = req.query.filePath;
     // Send download link of the file
     res.sendFile(filePath, (err)=>{
         if(err){
