@@ -56,6 +56,7 @@ CREATE TABLE `File` (
   `File_Size` INT(20),
   `Mimetype` VARCHAR(225),
   `Thumbnail_Path` VARCHAR(225),
+  `File_Created_Date` varchar(255),
   PRIMARY KEY (`File_UID`),
   FOREIGN KEY (`Shelf_UID`) REFERENCES `Shelf`(`Shelf_UID`)
 );
@@ -80,6 +81,7 @@ delete from shelf; -- DANGER
 
 SELECT * FROM file;
 select * from file where Shelf_UID="e7c131ef-6e49-4e1a-bf84-eab3b05cf52f";
+ALTER TABLE file ADD File_Created_Date varchar(255);
 delete from file; -- DANGER
 
 

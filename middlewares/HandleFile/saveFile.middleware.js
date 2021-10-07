@@ -31,7 +31,8 @@ const saveFile = async (req, res, next) => {
                 Path,
                 File_Size,
                 Mimetype,
-                Thumbnail_Path)
+                Thumbnail_Path,
+                File_Created_Date)
             VALUES (
                 "${fileUid}", 
                 "${shelfUId}",
@@ -41,7 +42,8 @@ const saveFile = async (req, res, next) => {
                 "${formatedPath}", 
                 "${size}", 
                 "${formatedFileType}",
-                "${formatedThumbnailPath}")
+                "${formatedThumbnailPath}",
+                "${Date.now()}")
     `);
 
     next();

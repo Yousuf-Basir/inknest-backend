@@ -5,7 +5,7 @@ const {getFileStoragePath} = require("../../tools/getFileStoragePath.tool");
 const multerUpload = multer({
     dest: getFileStoragePath(),
     limits: {
-        fileSize: 1024*1024 * 10,  // 10 mb
+        fileSize: 1024*1024 * 50,  // 50 mb
     },
     fileFilter: (req, file, cb) => {
         // if(file.mimetype == "application/pdf"){
