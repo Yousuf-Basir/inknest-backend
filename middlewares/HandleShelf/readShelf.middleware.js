@@ -9,7 +9,12 @@ const readShelf = async(req, res, next) => {
     `);
 
     // userShelf[0] contains array of all rows and userShelfs[1] contains field object
-    req.shelf = {userShelfs: userShelfs[0]};
+    if(userShelfs[0].length > 0){
+        req.shelf = {userShelfs: userShelfs[0]};
+    }else{
+        req.shelf = {userShelfs: []};
+    }
+    
 
     next();
 }

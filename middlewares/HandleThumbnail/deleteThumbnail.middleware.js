@@ -1,21 +1,26 @@
 const { getThumbnailStoragePath } = require("../../tools/getFileStoragePath.tool");
 const path = require("path");
 const fs = require("fs/promises");
+const pool = require("../../tools/mysql.tool");
 
 
-const deleteThumbnail = (req, res, next) => {
-    // Get thumbnailPath from request body, sent from client
-    const {thumbnailPath} = req.body;
+const deleteThumbnail = async (req, res, next) => {
+    const {fileUid} = req.query;
 
-    
-    fs.unlink(thumbnailPath).then(()=>{
-        next();
-    }).catch((err) => {
-        res.json({
-            msg: "Error deleting file thumbnail",
-            err: err
-        })
-    })
+    const book = await pool.promise().query(`select * from file where File_UID="${fileUid}"`);
+    if (book[0].length > 0) {
+        const row = book[0];
+        if(row[0].Thumbnail_Path){
+            fs.unlink(book[0].Thumbnail_Path).then(async () => {
+                next();
+            }).catch((err) => {
+                console.log(err);
+                return res.sendStatus(500)
+            });
+        }
+    } else {
+        res.send("Thumbnail not found");
+    }
 
 }
 

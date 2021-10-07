@@ -20,6 +20,7 @@ router.put("/shelf", authenticateToken, createShelf, (req, res) => {
 // Get all shelfs of the authenticated user
 router.get("/shelf", authenticateToken, readShelf, (req, res) => {
     // get shelfs object that contains users shelfs rows from readShelf middleware
+    console.log("req")
     const {userShelfs} = req.shelf;
 
     res.status(200).json({
