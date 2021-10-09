@@ -5,7 +5,7 @@ const createShare = async(req, res, next) => {
     // get shelfOwner UID from authenticateToken middleware
     const {userUid} = req.user;
     // get shared shelf properties from req.body using POST
-    const {shelfUid, sharedWithUid, shelfName, sharedBy, sharedWith} = req.body;
+    const {shelfUid, sharedByUid, sharedWithUid, shelfName, sharedBy, sharedWith} = req.body;
 
     const sharedShelfUid = uuidv4();
 
@@ -13,6 +13,7 @@ const createShare = async(req, res, next) => {
         INSERT INTO Shared_Shelf(
             Shared_Shelf_UID,
             Shelf_UID,
+            Shared_By_UID,
             Shared_With_UID,
             Shared_Date,
             Shelf_Name,
@@ -21,6 +22,7 @@ const createShare = async(req, res, next) => {
         VALUES (
             "${sharedShelfUid}",
             "${shelfUid}",
+            "${sharedByUid}",
             "${sharedWithUid}",
             "${Date.now()}",
             "${shelfName}",

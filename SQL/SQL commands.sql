@@ -19,6 +19,7 @@ CREATE TABLE `Shared_Shelf` (
   `Shared_Shelf_UID` VARCHAR(225),
   `Shelf_UID` VARCHAR(225),
   `Shared_With_UID` VARCHAR(225),
+  `Shared_By_UID` VARCHAR(225),
   `Shared_Date` VARCHAR(225),
   `Shelf_Name` VARCHAR(225),
   `Shared_By` VARCHAR(225),
@@ -92,6 +93,7 @@ delete from Shared_Shelf; -- DANGER
 ALTER TABLE Shared_Shelf ADD Shelf_Name varchar(255);
 ALTER TABLE Shared_Shelf ADD Shared_By varchar(255);
 ALTER TABLE Shared_Shelf ADD Shared_With varchar(255);
+ALTER TABLE Shared_Shelf ADD Shared_By_UID varchar(255);
 
 
 
