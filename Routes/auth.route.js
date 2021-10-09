@@ -66,7 +66,7 @@ router.post("/signup", async (req, res) => {
 
 
     // Generate JWT toekn
-    const accessToken = generateAccessToken({ email: email, userUid: userUid, inkShelfUid: shelfUid });
+    const accessToken = generateAccessToken({ email: email, firstName: firstName, lastName: lastName, userUid: userUid, inkShelfUid: shelfUid });
 
     // Send response with JWT token 
     res.json({
@@ -91,7 +91,7 @@ router.post("/login", async (req, res) => {
     if (userPassword !== password) { return res.json({ msg: "Invalid user credentials x" }); }
 
     // Generate JWT using email and UID
-    const accessToken = generateAccessToken({ email: email, userUid: rows[0].User_UID, inkShelfUid: rows[0].Inkshelf_UID })
+    const accessToken = generateAccessToken({ email: email, firstName: rows[0].First_Name, lastName: rows[0].Last_Name, userUid: rows[0].User_UID, inkShelfUid: rows[0].Inkshelf_UID })
     // Send JWT to client
     return res.json({
         accessToken: accessToken,

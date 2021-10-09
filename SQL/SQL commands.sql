@@ -20,6 +20,8 @@ CREATE TABLE `Shared_Shelf` (
   `Shelf_UID` VARCHAR(225),
   `Shared_With_UID` VARCHAR(225),
   `Shared_Date` VARCHAR(225),
+  `Shelf_Name` VARCHAR(225),
+  `Shared_By` VARCHAR(225),
   PRIMARY KEY (`Shared_Shelf_UID`),
   FOREIGN KEY (`Shared_With_UID`) REFERENCES `ink_user`(`User_UID`),
   FOREIGN KEY (`Shelf_UID`) REFERENCES `Shelf`(`Shelf_UID`)
@@ -84,7 +86,12 @@ select * from file where Shelf_UID="e7c131ef-6e49-4e1a-bf84-eab3b05cf52f";
 ALTER TABLE file ADD File_Created_Date varchar(255);
 delete from file; -- DANGER
 
+select * from Shared_Shelf;
+delete from Shared_Shelf; -- DANGER
 
+ALTER TABLE Shared_Shelf ADD Shelf_Name varchar(255);
+ALTER TABLE Shared_Shelf ADD Shared_By varchar(255);
+ALTER TABLE Shared_Shelf ADD Shared_With varchar(255);
 
 
 
