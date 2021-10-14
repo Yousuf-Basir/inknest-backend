@@ -10,6 +10,7 @@ const getData = require("./Routes/getData.route");
 const fileCrude = require("./Routes/fileCrud.route");
 const shelfCrud = require("./Routes/shelfCrud.route");
 const sharingRoute = require("./Routes/sharing.route");
+const exploreRoute = require("./Routes/explore.route");
 
 app.use(cors())
 app.use(express.json());
@@ -19,6 +20,7 @@ app.use(getData);
 app.use(fileCrude);
 app.use(shelfCrud);
 app.use(sharingRoute);
+app.use(exploreRoute);
 
 module.exports = app;
 
