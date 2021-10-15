@@ -4,7 +4,7 @@ const createShare = require("../middlewares/HandleShare/createShare.middleware")
 const deleteShare = require("../middlewares/HandleShare/deleteShare.middleware");
 const deleteSharedWithMe = require("../middlewares/HandleShare/deleteSharedWithMe.middleware");
 const listSharedWithMe = require("../middlewares/HandleShare/lisitSharedWithMe.middleware");
-const listSharedByMe = require("../middlewares/HandleShare/listSharedByme.middleware");
+const listSharedByMe = require("../middlewares/HandleShare/listSharedByMe.middleware");
 const listUsers = require("../middlewares/HandleShare/listUsers.middleware");
 
 const router = Router();
