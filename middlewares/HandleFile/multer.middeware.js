@@ -7,7 +7,7 @@ const multerUpload = multer({
     limits: {
         fileSize: 1024*1024 * 50,  // 50 mb
     },
-    fileFilter: (req, file, cb) => {
+    fileFilter: (req, file, cb) => {        
         // if(file.mimetype == "application/pdf"){
         //     cb(null, true);
         // }else{

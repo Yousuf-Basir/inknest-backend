@@ -35,7 +35,7 @@ router.get("/file/get-thumbnail-url", authenticateGetUrlToken, (req, res) => {
 
     // since file name and thumbnail image file name is same, 
         // get thumbnail file path by joining thumbnail storage path and fileName
-    const filePath =  path.join(getThumbnailStoragePath(), (fileName + ".jpg"));
+    const filePath =  path.join(getThumbnailStoragePath(), (fileName + ".webp"));
 
     // Send download link of the file
     res.sendFile(filePath, (err)=>{

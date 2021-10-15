@@ -1,9 +1,27 @@
-const pdfConverter = require('pdf-poppler');
+// const pdfConverter = require('pdf-poppler');
 const path = require("path")
 const {getThumbnailStoragePath} = require('../../tools/getFileStoragePath.tool');
 const fs = require("fs");
+const ImageDataURI = require('image-data-uri');
 
+const makeThumbnail = (req, res, next) => {
+    // get the file path as filePath passed by multer middleware
+    const {file}= req;
+    // get the image data uri from request body
+    const {pdfThumbnail} = req.body;
+    const dataURI = pdfThumbnail;
+    const filePath = path.join(getThumbnailStoragePath(), path.basename(file.path));
 
+    ImageDataURI.outputFile(dataURI, filePath)
+    // RETURNS image path of the created file 'out/path/fileName.png'
+    .then(res => {
+        console.log(res);
+        file.thumbnailPath = res ; 
+        next();
+    });
+}
+
+/*
 const makeThumbnail = (req, res, next) => {
     // get the file path as filePath passed by multer middleware
     const {file}= req;
@@ -49,5 +67,6 @@ const makeThumbnail = (req, res, next) => {
     })
 
 }
+*/
 
 module.exports = makeThumbnail;
