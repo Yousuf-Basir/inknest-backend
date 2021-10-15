@@ -1,6 +1,6 @@
 const pool = require("../../tools/mysql.tool");
 const { v4: uuidv4 } = require('uuid');
-const getFileType = require("../../tools/GetFileType");
+const getFileType = require("../../tools/getFileType");
 
 const saveFile = async (req, res, next) => {
     // Get user UID from req object passed by authenticateToken middleware

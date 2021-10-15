@@ -1,6 +1,7 @@
 CREATE USER 'inknest'@'localhost' IDENTIFIED BY 'letsrock'; 
 CREATE DATABASE `inknestdb`;
 GRANT ALL ON *.* TO 'inknest'@'localhost';
+FLUSH PRIVILEGES;
 
 CREATE TABLE `ink_user` (
   `User_UID` VARCHAR(225),
