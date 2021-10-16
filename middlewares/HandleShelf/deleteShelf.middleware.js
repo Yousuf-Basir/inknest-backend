@@ -12,7 +12,7 @@ const deleteShelf = async(req, res, next) => {
     `);
     // delete the shelf
     const deletedShelf = await pool.promise().query(`
-        DELETE FROM shelf WHERE Shelf_Owner_UID="${userUid}"  AND Shelf_UID="${shelfUid}";
+        DELETE FROM Shelf WHERE Shelf_Owner_UID="${userUid}"  AND Shelf_UID="${shelfUid}";
     `);
 
     
