@@ -3,7 +3,7 @@ CREATE DATABASE `inknestdb`;
 GRANT ALL ON *.* TO 'inknest'@'localhost';
 FLUSH PRIVILEGES;
 
-CREATE TABLE `ink_user` (
+CREATE TABLE `Ink_User` (
   `User_UID` VARCHAR(225),
   `Email` VARCHAR(225),
   `Password` VARCHAR(225),
