@@ -20,10 +20,11 @@ CREATE TABLE `Shared_Shelf` (
   `Shared_Shelf_UID` VARCHAR(225),
   `Shelf_UID` VARCHAR(225),
   `Shared_With_UID` VARCHAR(225),
+  `Shared_With` VARCHAR(225),
   `Shared_By_UID` VARCHAR(225),
+  `Shared_By` VARCHAR(225),
   `Shared_Date` VARCHAR(225),
   `Shelf_Name` VARCHAR(225),
-  `Shared_By` VARCHAR(225),
   PRIMARY KEY (`Shared_Shelf_UID`),
   FOREIGN KEY (`Shared_With_UID`) REFERENCES `ink_user`(`User_UID`),
   FOREIGN KEY (`Shelf_UID`) REFERENCES `Shelf`(`Shelf_UID`)
