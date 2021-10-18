@@ -5,7 +5,7 @@ const getFileInfo = (fileLink) => {
     return new Promise(async (resolve, reject) => {
         // starts browser
         let browser = await puppeteer.launch({
-            headless: false,
+            headless: true,
             defaultViewport: null,
             args: ["--start-maximized"]
         });
