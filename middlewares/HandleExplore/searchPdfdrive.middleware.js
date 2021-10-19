@@ -25,8 +25,8 @@ const searchBook = (bookName) => {
 
 
 const searchPdfdrive = async (req, res, next) => {
-    const bookName = req.query.bookName;
-    console.log(bookName);
+    const bookName = encodeURI(req.query.bookName);
+    console.log("bookname: ", bookName);
     searchBook(bookName).then((listInnerHtml) => {
         req.body.listInnerHtml = listInnerHtml;
         next();

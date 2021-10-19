@@ -34,51 +34,63 @@ const cheerio = require("cheerio");
 
 const getFileInfo = (fileLink) => {
     return new Promise(async (resolve, reject) => {
+        const encodedFileLink = encodeURI(fileLink);
         // pdfdrive url for the book requested by user
-        const url = `https://www.pdfdrive.com/${fileLink}/`;
-        const { data } = await axios.get(url);
-        // Load HTML we fetched in the previous line
-        const $ = cheerio.load(data);
+        const url = `https://www.pdfdrive.com/${encodedFileLink}/`;
+        try {
+            const { data } = await axios.get(url);
+            // Load HTML we fetched in the previous line
+            const $ = cheerio.load(data);
 
-        // at pdfdrive the detals page of each books has a preview button
-        // preview button has an attribute called data-preview with a url value which contains book id and session number
-        const previewButtonMain = $("#previewButtonMain").attr("data-preview");
+            // at pdfdrive the detals page of each books has a preview button
+            // preview button has an attribute called data-preview with a url value which contains book id and session number
+            const previewButtonMain = $("#previewButtonMain").attr("data-preview");
 
-        // seperate the id and session from main url
-        var params = previewButtonMain.split("?")[1];
-        
-        // this is the url that needs book id and session and the page contains download link button
-        var downloadSite = "https://www.pdfdrive.com/ebook/broken?" + params;
-        const downloadSiteData = await axios.get(downloadSite);
+            // seperate the id and session from main url
+            var params = previewButtonMain.split("?")[1];
 
-        const $$ = cheerio.load(downloadSiteData.data);
-        // get the href value from download button
-        const downloadLink = $$("a.btn-primary").attr("href");
+            // this is the url that needs book id and session and the page contains download link button
+            var downloadSite = "https://www.pdfdrive.com/ebook/broken?" + params;
+            try {
+                const downloadSiteData = await axios.get(downloadSite);
+                const $$ = cheerio.load(downloadSiteData.data);
+                // get the href value from download button
+                const downloadLink = $$("a.btn-primary").attr("href");
 
-        if(downloadLink){
-            // returning actual download url
-            const actualDownloadLink = `https://pdfdrive.com${downloadLink}`
-            resolve(actualDownloadLink);
-        }else{
+                if (downloadLink) {
+                    // returning actual download url
+                    const actualDownloadLink = `https://pdfdrive.com${downloadLink}`
+                    resolve(actualDownloadLink);
+                } else {
+                    reject();
+                }
+            } catch (err) {
+                reject()
+            }
+        } catch (err) {
             reject();
         }
 
-        
     })
 }
 
 const grabDownloadLink = (req, res, next) => {
-    const { fileLink, bookTitle } = req.body
-    getFileInfo(fileLink).then(fileUrl => {
-        req.body.fileInfo = {
-            bookTitle: bookTitle,
-            fileUrl: fileUrl,
-        };
-        next();
-    }).catch(err => {
+    const { fileLink, bookTitle } = req.body;
+    try {
+        getFileInfo(fileLink).then(fileUrl => {
+            req.body.fileInfo = {
+                bookTitle: bookTitle,
+                fileUrl: fileUrl,
+            };
+            next();
+        }).catch(err => {
+            console.log(err);
+            return res.sendStatus(503);
+        });
+    } catch (err) {
         console.log(err);
-        return res.send("Error occured while getting download button innerHtml for book");
-    })
+        return res.sendStatus(503);
+    }
 }
 
 module.exports = grabDownloadLink;
