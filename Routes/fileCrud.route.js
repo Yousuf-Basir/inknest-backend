@@ -9,12 +9,18 @@ const makeThumbnail = require("../middlewares/HandleThumbnail/makeThumbnail.midd
 const { getThumbnailStoragePath, getFileStoragePath } = require("../tools/getFileStoragePath.tool");
 const path = require("path");
 const authenticateGetUrlToken = require("../middlewares/authenticateGetUrlToken.middleware");
+const moveFile = require("../middlewares/HandleFile/moveFile.middleware");
 
 const router = Router();
 // file upload
 router.post("/file", authenticateToken, multerUpload, makeThumbnail, saveFile, (req, res) => {
     res.json(req.file);
 });
+
+router.post("/move-file", authenticateToken, moveFile, (req, res) => {
+    console.log(req.body)
+    res.send("File moved successfully");
+})
 
 // list all user files
 router.get("/file", authenticateToken, listUserFiles, (req, res) => {

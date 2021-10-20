@@ -9,6 +9,9 @@ const makeThumbnail = (req, res, next) => {
     const {file}= req;
     // get the image data uri from request body
     const {pdfThumbnail} = req.body;
+    if(!pdfThumbnail){
+        return next();
+    }
     const dataURI = pdfThumbnail;
     const filePath = path.join(getThumbnailStoragePath(), path.basename(file.path));
 
