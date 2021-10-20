@@ -11,7 +11,7 @@ const deleteThumbnail = async (req, res, next) => {
     if (book[0].length > 0) {
         const row = book[0];
         if(row[0].Thumbnail_Path){
-            fs.unlink(book[0].Thumbnail_Path).then(async () => {
+            fs.unlink(row[0].Thumbnail_Path).then(async () => {
                 next();
             }).catch((err) => {
                 console.log(err);

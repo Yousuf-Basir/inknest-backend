@@ -22,7 +22,7 @@ router.get("/file", authenticateToken, listUserFiles, (req, res) => {
 });
 
 // Delete user file
-router.delete("/file", authenticateToken, deleteUserFile, deleteThumbnail, (req, res) => {
+router.delete("/file", authenticateToken,  deleteThumbnail, deleteUserFile, (req, res) => {
     res.json({
         "msg": "file deleted"
     });
