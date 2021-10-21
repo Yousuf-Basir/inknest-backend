@@ -7,7 +7,7 @@ const pool = require("../../tools/mysql.tool");
 const deleteThumbnail = async (req, res, next) => {
     const {fileUid} = req.query;
 
-    const book = await pool.promise().query(`select * from file where File_UID="${fileUid}"`);
+    const book = await pool.promise().query(`select * from File where File_UID="${fileUid}"`);
     if (book[0].length > 0) {
         const row = book[0];
         if(row[0].Thumbnail_Path){
