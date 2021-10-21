@@ -15,11 +15,11 @@ const deleteThumbnail = async (req, res, next) => {
                 next();
             }).catch((err) => {
                 console.log(err);
-                return res.sendStatus(500)
+                return next();
             });
         }
     } else {
-        res.send("Thumbnail not found");
+        return next();
     }
 
 }
