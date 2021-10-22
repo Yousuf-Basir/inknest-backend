@@ -20,7 +20,7 @@ const deleteUserFile = async (req, res, next) => {
             }
         }).catch((err) => {
             console.log(err);
-            return res.sendStatus(500)
+            return next();
         });
     } else {
         res.send("File not found");
