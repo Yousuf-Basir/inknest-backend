@@ -16,7 +16,7 @@ const deleteUserFile = async (req, res, next) => {
             if (deletedFile[0].affectedRows > 0) {
                 next();
             } else {
-                return res.sendStatus(500);
+                return  next();
             }
         }).catch((err) => {
             console.log(err);
