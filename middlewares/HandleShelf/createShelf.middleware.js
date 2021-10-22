@@ -7,6 +7,10 @@ const createShelf = async (req, res, next) => {
     // get shelf properties from req.body using POST
     const {shelfName, isOpen,  shelfDescription} = req.body;
 
+    if(!shelfName || !isOpen || !shelfDescription){
+        return next();
+    }
+
     const shelfUid = uuidv4();
 
     await pool.promise().query(`

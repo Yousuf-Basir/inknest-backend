@@ -33,12 +33,12 @@ const deleteShelf = async (req, res, next) => {
     const { shelfUid } = req.query;
 
     
-    const books = await pool.promise().query(`select * from file where Shelf_UID="${shelfUid}"`);
+    const books = await pool.promise().query(`select * from File where Shelf_UID="${shelfUid}"`);
     const booksRow = books[0];
 
     // delete all files of this shelf from disk
     // delte all books of this shelf
-    await pool.promise().query(`DELETE FROM file WHERE Shelf_UID="${shelfUid}";`);
+    await pool.promise().query(`DELETE FROM File WHERE Shelf_UID="${shelfUid}";`);
     
     // delete this shelf from shared shelf table
     await pool.promise().query(`DELETE FROM Shared_Shelf WHERE Shelf_UID="${shelfUid}";`);
